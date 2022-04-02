@@ -16,7 +16,7 @@ export const YourItems = ({
   const [items, setItems] = useState({} as Item[]);
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
-  useEffect(() => {
+  useEffect(() => {    
     getItems(web3).then((items) => {
       setItems(
         items

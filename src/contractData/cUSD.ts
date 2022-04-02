@@ -1,5 +1,5 @@
 const cUSD = {
-  address: "0x24985bDE88F22AbeEc605071efe04B22091fE1d5",
+  address: "0x874069fa1eb16d44d622f2e0ca25eea172369bc1",
   abi: [
     {
       constant: true,

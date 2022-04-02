@@ -1,359 +1,412 @@
 const marketplaceInfo = {
-  address: "0x676CBb76dA514aE68b91c0ce5CcB1876aC3b291C",
+  address: "0x2D6De96A05033d1eBbF3f39000EBC49D9E065f6c",
   abi: [
     {
-      anonymous: false,
-      inputs: [
+      "anonymous": false,
+      "inputs": [
         {
-          indexed: false,
-          internalType: "address",
-          name: "contractAddr",
-          type: "address",
+          "indexed": false,
+          "internalType": "address",
+          "name": "contractAddr",
+          "type": "address"
         },
         {
-          indexed: false,
-          internalType: "uint256",
-          name: "itemId",
-          type: "uint256",
-        },
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "itemId",
+          "type": "uint256"
+        }
       ],
-      name: "newEscrow",
-      type: "event",
+      "name": "newEscrow",
+      "type": "event"
     },
     {
-      anonymous: false,
-      inputs: [
+      "anonymous": false,
+      "inputs": [
         {
-          indexed: false,
-          internalType: "string",
-          name: "name",
-          type: "string",
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
         },
         {
-          indexed: false,
-          internalType: "string",
-          name: "description",
-          type: "string",
+          "indexed": false,
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
         },
         {
-          indexed: false,
-          internalType: "uint256",
-          name: "price",
-          type: "uint256",
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
         },
         {
-          indexed: false,
-          internalType: "string",
-          name: "ipfsHash",
-          type: "string",
+          "indexed": false,
+          "internalType": "string",
+          "name": "ipfsHash",
+          "type": "string"
         },
         {
-          indexed: false,
-          internalType: "bool",
-          name: "sold",
-          type: "bool",
+          "indexed": false,
+          "internalType": "bool",
+          "name": "sold",
+          "type": "bool"
         },
         {
-          indexed: false,
-          internalType: "uint256",
-          name: "itemId",
-          type: "uint256",
-        },
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "itemId",
+          "type": "uint256"
+        }
       ],
-      name: "newListing",
-      type: "event",
+      "name": "newListing",
+      "type": "event"
     },
     {
-      inputs: [
+      "inputs": [
         {
-          internalType: "uint256",
-          name: "itemId",
-          type: "uint256",
-        },
+          "internalType": "address",
+          "name": "newUser",
+          "type": "address"
+        }
       ],
-      name: "deactivateListing",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
+      "name": "authorizeUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      inputs: [
+      "inputs": [
         {
-          internalType: "string",
-          name: "name",
-          type: "string",
-        },
-        {
-          internalType: "string",
-          name: "description",
-          type: "string",
-        },
-        {
-          internalType: "uint256",
-          name: "price",
-          type: "uint256",
-        },
-        {
-          internalType: "string",
-          name: "ipfsHash",
-          type: "string",
-        },
+          "internalType": "uint256",
+          "name": "itemId",
+          "type": "uint256"
+        }
       ],
-      name: "newItem",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
+      "name": "deactivateListing",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      inputs: [
+      "inputs": [
         {
-          internalType: "uint256",
-          name: "listingId",
-          type: "uint256",
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
         },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "ipfsHash",
+          "type": "string"
+        }
       ],
-      name: "purchase",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
+      "name": "newItem",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      inputs: [
+      "inputs": [
         {
-          internalType: "uint256",
-          name: "listingId",
-          type: "uint256",
-        },
+          "internalType": "uint256",
+          "name": "listingId",
+          "type": "uint256"
+        }
       ],
-      name: "releaseEscrow",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
+      "name": "purchase",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      inputs: [
+      "inputs": [
         {
-          internalType: "address",
-          name: "_cUSDAddr",
-          type: "address",
-        },
+          "internalType": "uint256",
+          "name": "listingId",
+          "type": "uint256"
+        }
       ],
-      stateMutability: "nonpayable",
-      type: "constructor",
+      "name": "releaseEscrow",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      inputs: [
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
         {
-          internalType: "uint256",
-          name: "listingId",
-          type: "uint256",
-        },
+          "internalType": "address",
+          "name": "_cUSDAddr",
+          "type": "address"
+        }
       ],
-      name: "getListingInfo",
-      outputs: [
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "checkBalance",
+      "outputs": [
         {
-          components: [
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "listingId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getListingInfo",
+      "outputs": [
+        {
+          "components": [
             {
-              internalType: "string",
-              name: "name",
-              type: "string",
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
             },
             {
-              internalType: "string",
-              name: "description",
-              type: "string",
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
             },
             {
-              internalType: "uint256",
-              name: "price",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
             },
             {
-              internalType: "string",
-              name: "ipfsHash",
-              type: "string",
+              "internalType": "string",
+              "name": "ipfsHash",
+              "type": "string"
             },
             {
-              internalType: "enum Marketplace.ListingStatus",
-              name: "status",
-              type: "uint8",
+              "internalType": "enum Marketplace.ListingStatus",
+              "name": "status",
+              "type": "uint8"
             },
             {
-              internalType: "uint256",
-              name: "itemId",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "itemId",
+              "type": "uint256"
             },
             {
-              internalType: "address",
-              name: "escrowAddr",
-              type: "address",
+              "internalType": "address",
+              "name": "escrowAddr",
+              "type": "address"
             },
+            {
+              "internalType": "uint256",
+              "name": "createdOn",
+              "type": "uint256"
+            }
           ],
-          internalType: "struct Marketplace.Listing",
-          name: "",
-          type: "tuple",
-        },
+          "internalType": "struct Marketplace.Listing",
+          "name": "",
+          "type": "tuple"
+        }
       ],
-      stateMutability: "view",
-      type: "function",
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      inputs: [],
-      name: "getListings",
-      outputs: [
+      "inputs": [],
+      "name": "getListings",
+      "outputs": [
         {
-          components: [
+          "components": [
             {
-              internalType: "string",
-              name: "name",
-              type: "string",
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
             },
             {
-              internalType: "string",
-              name: "description",
-              type: "string",
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
             },
             {
-              internalType: "uint256",
-              name: "price",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
             },
             {
-              internalType: "string",
-              name: "ipfsHash",
-              type: "string",
+              "internalType": "string",
+              "name": "ipfsHash",
+              "type": "string"
             },
             {
-              internalType: "enum Marketplace.ListingStatus",
-              name: "status",
-              type: "uint8",
+              "internalType": "enum Marketplace.ListingStatus",
+              "name": "status",
+              "type": "uint8"
             },
             {
-              internalType: "uint256",
-              name: "itemId",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "itemId",
+              "type": "uint256"
             },
             {
-              internalType: "address",
-              name: "escrowAddr",
-              type: "address",
+              "internalType": "address",
+              "name": "escrowAddr",
+              "type": "address"
             },
+            {
+              "internalType": "uint256",
+              "name": "createdOn",
+              "type": "uint256"
+            }
           ],
-          internalType: "struct Marketplace.Listing[]",
-          name: "",
-          type: "tuple[]",
-        },
+          "internalType": "struct Marketplace.Listing[]",
+          "name": "",
+          "type": "tuple[]"
+        }
       ],
-      stateMutability: "view",
-      type: "function",
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      inputs: [],
-      name: "getUserListings",
-      outputs: [
+      "inputs": [],
+      "name": "getUserListings",
+      "outputs": [
         {
-          components: [
+          "components": [
             {
-              internalType: "string",
-              name: "name",
-              type: "string",
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
             },
             {
-              internalType: "string",
-              name: "description",
-              type: "string",
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
             },
             {
-              internalType: "uint256",
-              name: "price",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
             },
             {
-              internalType: "string",
-              name: "ipfsHash",
-              type: "string",
+              "internalType": "string",
+              "name": "ipfsHash",
+              "type": "string"
             },
             {
-              internalType: "enum Marketplace.ListingStatus",
-              name: "status",
-              type: "uint8",
+              "internalType": "enum Marketplace.ListingStatus",
+              "name": "status",
+              "type": "uint8"
             },
             {
-              internalType: "uint256",
-              name: "itemId",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "itemId",
+              "type": "uint256"
             },
             {
-              internalType: "address",
-              name: "escrowAddr",
-              type: "address",
+              "internalType": "address",
+              "name": "escrowAddr",
+              "type": "address"
             },
+            {
+              "internalType": "uint256",
+              "name": "createdOn",
+              "type": "uint256"
+            }
           ],
-          internalType: "struct Marketplace.Listing[]",
-          name: "",
-          type: "tuple[]",
-        },
+          "internalType": "struct Marketplace.Listing[]",
+          "name": "",
+          "type": "tuple[]"
+        }
       ],
-      stateMutability: "view",
-      type: "function",
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      inputs: [
+      "inputs": [
         {
-          internalType: "address",
-          name: "wallet",
-          type: "address",
-        },
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        }
       ],
-      name: "getUserListings",
-      outputs: [
+      "name": "getUserListings",
+      "outputs": [
         {
-          components: [
+          "components": [
             {
-              internalType: "string",
-              name: "name",
-              type: "string",
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
             },
             {
-              internalType: "string",
-              name: "description",
-              type: "string",
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
             },
             {
-              internalType: "uint256",
-              name: "price",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
             },
             {
-              internalType: "string",
-              name: "ipfsHash",
-              type: "string",
+              "internalType": "string",
+              "name": "ipfsHash",
+              "type": "string"
             },
             {
-              internalType: "enum Marketplace.ListingStatus",
-              name: "status",
-              type: "uint8",
+              "internalType": "enum Marketplace.ListingStatus",
+              "name": "status",
+              "type": "uint8"
             },
             {
-              internalType: "uint256",
-              name: "itemId",
-              type: "uint256",
+              "internalType": "uint256",
+              "name": "itemId",
+              "type": "uint256"
             },
             {
-              internalType: "address",
-              name: "escrowAddr",
-              type: "address",
+              "internalType": "address",
+              "name": "escrowAddr",
+              "type": "address"
             },
+            {
+              "internalType": "uint256",
+              "name": "createdOn",
+              "type": "uint256"
+            }
           ],
-          internalType: "struct Marketplace.Listing[]",
-          name: "",
-          type: "tuple[]",
-        },
+          "internalType": "struct Marketplace.Listing[]",
+          "name": "",
+          "type": "tuple[]"
+        }
       ],
-      stateMutability: "view",
-      type: "function",
-    },
-  ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
 };
 
 export default marketplaceInfo;
