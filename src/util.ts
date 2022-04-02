@@ -1,6 +1,8 @@
 import { createContext } from "react";
+import Web3 from "web3";
 
 export const DesktopContext = createContext(false);
+export const Web3Context = createContext({} as Web3);
 
 export interface Item {
   id: string;
