@@ -8,6 +8,7 @@ import FABs from "../components/ActionButtons";
 import { uploadFile } from "../web3/IPFS";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import greeterInfo from "../contractData/GreeterInfo";
+import marketplaceInfo from "../contractData/MarketplaceInfo";
 
 export const NewItem = ({
   route,
@@ -21,31 +22,30 @@ export const NewItem = ({
   async function listNewItem() {
     const address = connector.accounts[0];
     console.log(address);
+    console.log(item);
+    console.log(String(item.price))
     const data = web3.eth.abi.encodeFunctionCall(
       {
         name: "newItem",
         type: "function",
-        inputs: [
-          {
-            type: "string",
-            name: "name",
-          },
-          {
-            type: "uint256",
-            name: "price",
-          },
-          {
-            type: "string",
-            name: "ipfsHash",
-          },
-        ],
-      },
-      [item.title, item.description, String(item.price), item.ipfshash]
-    );
+        inputs: [{
+          type: 'string',
+          name: 'name'
+      },{
+          type: 'string',
+          name: 'description'
+      },{
+        type: 'uint256',
+        name: 'price'
+      },{
+        type: 'string',
+        name: 'ipfsHash'
+      }]
+      }, [item.title, item.description, String(item.price), 'asdf;akj']);
 
     const estimatedGas = await web3.eth.estimateGas({
       from: address,
-      to: greeterInfo.address,
+      to: marketplaceInfo.address,
       data: data,
     });
 
@@ -53,12 +53,12 @@ export const NewItem = ({
 
     const txHash = await connector.sendTransaction({
       from: address,
-      to: greeterInfo.address,
+      to: marketplaceInfo.address,
       gas: estimatedGas,
       gasPrice: estimatedGas + estimatedGas * 0.1,
       value: "0x00",
       data: data,
-      nonce: await web3.eth.getTransactionCount(greeterInfo.address),
+      nonce: await web3.eth.getTransactionCount(marketplaceInfo.address),
     });
 
     console.log("TX: ");
@@ -96,7 +96,7 @@ export const NewItem = ({
         />
         <TextInput
           autoComplete={undefined}
-          value={item.title}
+          value={item.price}
           mode="flat"
           label="Price"
           style={{ marginVertical: 5, width: "100%" }}
@@ -115,7 +115,7 @@ export const NewItem = ({
         />
         <TextInput
           autoComplete={undefined}
-          value={item.title}
+          value={item.description}
           mode="flat"
           label="Description"
           multiline

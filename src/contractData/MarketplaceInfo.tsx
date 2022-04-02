@@ -1,5 +1,5 @@
 const marketplaceInfo = {
-    address: "0x46D5c260eB3c47dC24912eBcad8Ad14293469383",
+    address: "0x0C4052B72190De6a4b9691E60BF07a1F4ae343aC",
     abi: [
         {
             "anonymous": false,
@@ -76,7 +76,7 @@ const marketplaceInfo = {
             "inputs": [
                 {
                     "internalType": "uint256",
-                    "name": "tokenId",
+                    "name": "listingId",
                     "type": "uint256"
                 }
             ],
@@ -103,6 +103,62 @@ const marketplaceInfo = {
             "name": "removeListing",
             "outputs": [],
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "listingId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getListing",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "description",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "price",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "ipfsHash",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "itemStatus",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "escrowAddr",
+                            "type": "address"
+                        }
+                    ],
+                    "internalType": "struct Marketplace.Listing",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -133,3 +189,5 @@ const marketplaceInfo = {
         }
     ]
 }
+
+export default marketplaceInfo;
