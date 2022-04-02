@@ -16,28 +16,35 @@ import {
   Title,
 } from "react-native-paper";
 import FABs from "../components/ActionButtons";
-import { DesktopContext, Item, navigationProps } from "../util";
+import { DesktopContext, Item, navigationProps, Web3Context } from "../util";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RenderItem } from "../components/Item";
+import { buyItem, getItems } from "../web3/smartContractCalls";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
 
 export const ItemList = ({
   route,
   navigation,
 }: StackScreenProps<navigationProps, "ItemList">) => {
-  //const [items, setItems] = useState({} as Item[]);
+  const connector = useWalletConnect();
+  const [items, setItems] = useState({} as Item[]);
   const [initializing, setInitializing] = useState(true);
   useEffect(() => {
-    //getItems
-    //CALL CONTRACT HERE
-    setInitializing(false);
+    getItems(web3).then((items) => {
+      setItems(
+        items
+          .filter(
+            (item) =>
+              item.status == "AVAILABLE" && item.seller != connector.accounts[0]
+          )
+          .sort((item) => item.createdOn)
+      );
+      setInitializing(false);
+    });
   }, []);
+  const web3 = useContext(Web3Context);
   const isDesktop = useContext(DesktopContext);
-  async function buyItem(itemIndex: number) {
-    //IMPLEMENT
-    //change item status to sold
-    //put money in
-  }
-  const items = [
+  /*const items = [
     {
       id: "2",
       description: "DESC1w",
@@ -57,14 +64,25 @@ export const ItemList = ({
       seller: "0x980988902345",
       status: "AVAILABLE",
     },
-  ];
+  ];*/
   const renderItem: ListRenderItem<Item> = ({ item, index }) => {
     return (
       <RenderItem
         item={item}
         action={() => {
           return (
-            <Button style={{ marginBottom: 10 }} onPress={() => buyItem(index)}>
+            <Button
+              style={{ marginBottom: 10 }}
+              onPress={() =>
+                buyItem(
+                  web3,
+                  connector,
+                  item.id,
+                  connector.accounts[0],
+                  item.price
+                )
+              }
+            >
               Buy
             </Button>
           );

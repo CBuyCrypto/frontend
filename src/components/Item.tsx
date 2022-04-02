@@ -3,7 +3,11 @@ import { Image, View } from "react-native";
 import { Button, Card, Subheading, Text } from "react-native-paper";
 import { DesktopContext, Item } from "../util";
 
-export const RenderItem = (props: { item: Item; action: () => ReactNode }) => {
+export const RenderItem = (props: {
+  item: Item;
+  action: () => ReactNode;
+  status?: string;
+}) => {
   const isDesktop = useContext(DesktopContext);
   return (
     <Card style={[{ margin: 10, height: 300 }, isDesktop && { width: 300 }]}>
@@ -18,6 +22,7 @@ export const RenderItem = (props: { item: Item; action: () => ReactNode }) => {
       >
         <View style={{ flex: 1, marginLeft: 5 }}>
           <Subheading numberOfLines={1}>{props.item.title}</Subheading>
+          {props.status && <Text>{props.status}</Text>}
           <Text numberOfLines={4}>{props.item.description}</Text>
         </View>
         <View

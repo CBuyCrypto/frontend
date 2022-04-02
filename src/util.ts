@@ -12,6 +12,7 @@ export interface Item {
   price: number;
   seller: string;
   status: "AVAILABLE" | "SOLD" | "RECEIVED" | "INACTIVE";
+  createdOn: number;
 }
 export type navigationProps = {
   ItemList: undefined;

@@ -7,8 +7,9 @@ import * as ImagePicker from "expo-image-picker";
 import FABs from "../components/ActionButtons";
 import { uploadFile } from "../web3/IPFS";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import greeterInfo from "../contractData/GreeterInfo";
 import marketplaceInfo from "../contractData/MarketplaceInfo";
+import { listItem } from "../web3/smartContractCalls";
+import { ItemList } from "./ItemList";
 
 export const NewItem = ({
   route,
@@ -29,58 +30,12 @@ export const NewItem = ({
       setError("Not everything filled out.");
       return;
     }
-    const address = connector.accounts[0];
-    console.log(address);
-    console.log(item);
-    console.log(String(item.price));
     const ipfsHash = await uploadFile(item.ipfshash);
-    const data = web3.eth.abi.encodeFunctionCall(
-      {
-        name: "newItem",
-        type: "function",
-        inputs: [
-          {
-            type: "string",
-            name: "name",
-          },
-          {
-            type: "string",
-            name: "description",
-          },
-          {
-            type: "uint256",
-            name: "price",
-          },
-          {
-            type: "string",
-            name: "ipfsHash",
-          },
-        ],
-      },
-      [item.title, item.description, String(item.price), ipfsHash]
-    );
-
-    const estimatedGas = await web3.eth.estimateGas({
-      from: address,
-      to: marketplaceInfo.address,
-      data: data,
-    });
-
-    console.log("Estimated Gas: " + estimatedGas);
-
-    const txHash = await connector.sendTransaction({
-      from: address,
-      to: marketplaceInfo.address,
-      gas: estimatedGas,
-      gasPrice: estimatedGas + estimatedGas * 0.1,
-      value: "0x00",
-      data: data,
-      nonce: await web3.eth.getTransactionCount(marketplaceInfo.address),
+    const resp = await listItem(web3, connector, connector.accounts[0], {
+      ...item,
+      ipfshash: ipfsHash,
     });
     navigation.navigate("ItemList");
-
-    console.log("TX: ");
-    console.log(txHash);
   }
   return (
     <View
