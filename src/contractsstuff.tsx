@@ -1,8 +1,8 @@
-import { HARDHAT_PORT, HARDHAT_PRIVATE_KEY } from "@env";
+//import { HARDHAT_PORT, HARDHAT_PRIVATE_KEY } from "@env";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import localhost from "react-native-localhost";
+//import localhost from "react-native-localhost";
 import Web3 from "web3";
 import { AbiItem } from "web3-utils";
 import greeterInfo from "../contractData/GreeterInfo";
