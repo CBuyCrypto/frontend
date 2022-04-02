@@ -1,8 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { Fragment, useCallback } from "react";
+import { Fragment, useCallback, useState } from "react";
 import { View } from "react-native";
 import {
+  ActivityIndicator,
   Appbar,
   Button,
   Headline,
@@ -19,8 +20,10 @@ const shortenAddress = (address: string) => {
 };
 export const LoginSwitch = () => {
   const connector = useWalletConnect();
-  const connectWallet = useCallback(() => {
-    return connector.connect();
+  const [initializing, setInitializing] = useState(false);
+  const connectWallet = useCallback(async () => {
+    const resp = await connector.connect();
+    return resp;
   }, [connector]);
   const logout = useCallback(() => {
     return connector.killSession();
@@ -39,12 +42,12 @@ export const LoginSwitch = () => {
           </Fragment>
         )}
       </Appbar.Header>
-      {!connector.connected && (
+      {!initializing && !connector.connected && (
         <Button mode="contained" onPress={connectWallet}>
           <Text>Connect a Wallet</Text>
         </Button>
       )}
-      {!!connector.connected && <Stack />}
+      {!initializing && !!connector.connected && <Stack />}
     </View>
   );
 };

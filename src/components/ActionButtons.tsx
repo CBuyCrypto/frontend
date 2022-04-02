@@ -17,14 +17,14 @@ const FABs = (props: { navigation: any }) => {
             onPress: () => props.navigation.navigate("NewItem"),
           },
           {
-            icon: "shopping",
-            label: "Items you bought",
-            onPress: () => props.navigation.navigate("BoughtItems"),
-          },
-          {
             icon: "account",
             label: "Items you are selling",
             onPress: () => props.navigation.navigate("account"),
+          },
+          {
+            icon: "shopping",
+            label: "Items you bought",
+            onPress: () => props.navigation.navigate("BoughtItems"),
           },
           {
             icon: "home",
