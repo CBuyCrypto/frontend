@@ -56,7 +56,6 @@ export const NewItem = ({
     console.log("TX: ");
     console.log(txHash);
 
-
     if (!item.title || !item.description || !item.ipfshash || !item.price) {
       setError("Not everything filled out.");
       return;
@@ -118,9 +117,10 @@ export const NewItem = ({
           <Image
             style={{
               resizeMode: "center",
-              height: 30,
+              height: 200,
+              width: "100%",
             }}
-            source={{ uri: "https://ipfs.io/ipfs/" + item.ipfshash }}
+            source={{ uri: item.ipfshash }}
           />
         )}
         <Button
@@ -132,7 +132,7 @@ export const NewItem = ({
               quality: 1,
             }).then((result) => {
               if (!result.cancelled) {
-                uploadFile(result.uri);
+                setItem({ ...item, ipfshash: result.uri });
               }
             })
           }

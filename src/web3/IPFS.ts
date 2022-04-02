@@ -1,4 +1,5 @@
 import axios from "axios";
+import FormData from "form-data";
 const API_KEY = "010c373b411c8676b904";
 const SECRET =
   "186df95adbbf8574805e1967f6f800a039480d48445013b2eaf8d4f59b96f036";
@@ -17,9 +18,31 @@ export async function uploadFile(localUri: string) {
     xhr.open("GET", localUri, true);
     xhr.send(null);
   })) as Blob;
-  const url = "https://api.pinata.cloud/data/testAuthentication";
-  const resp = await axios.get(url, {
-    headers: { pinata_api_key: API_KEY, pinata_secret_api_key: SECRET },
+  let data = new FormData();
+  const pinataOptions = JSON.stringify({
+    cidVersion: 0,
+    regions: [
+      {
+        id: "FRA1",
+        desiredReplicationCount: 1,
+      },
+      {
+        id: "NYC1",
+        desiredReplicationCount: 2,
+      },
+    ],
   });
-  console.log(resp);
+  data.append("pinataOptions", pinataOptions);
+  data.append("file", blob);
+  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+  const resp = await axios.post(url, data, {
+    maxBodyLength: 2e256,
+    headers: {
+      "Content-Type": `multipart/form-data`,
+      pinata_api_key: API_KEY,
+      pinata_secret_api_key: SECRET,
+    },
+  });
+
+  return resp.data.IpfsHash;
 }
