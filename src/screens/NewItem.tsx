@@ -20,7 +20,14 @@ export const NewItem = ({
     }
   }
   return (
-    <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 20 }}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        paddingHorizontal: 20,
+        overflow: "scroll",
+      }}
+    >
       <View
         style={{
           maxWidth: 500,

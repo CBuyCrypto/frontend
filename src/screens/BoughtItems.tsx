@@ -4,6 +4,7 @@ import { Button, Card, Paragraph, Text, Title } from "react-native-paper";
 import FABs from "../components/ActionButtons";
 import { DesktopContext, Item, navigationProps } from "../util";
 import { StackScreenProps } from "@react-navigation/stack";
+import { RenderItem } from "../components/Item";
 
 export const BoughtItems = ({
   route,
@@ -25,20 +26,12 @@ export const BoughtItems = ({
   }
   const renderItem: ListRenderItem<Item> = ({ item, index }) => {
     return (
-      <Card>
-        <Card.Title
-          title={item.title}
-          subtitle={item.status}
-          right={() => <Text>item.price</Text>}
-        />
-        <Card.Content>
-          <Paragraph>{item.description}</Paragraph>
-        </Card.Content>
-        <Card.Cover source={{ uri: "https://ipfs.io/ipfs/" + item.ipfshash }} />
-        <Card.Actions>
-          <Button onPress={() => received(index)}>Received</Button>
-        </Card.Actions>
-      </Card>
+      <RenderItem
+        item={item}
+        action={() => {
+          return <Button onPress={() => received(index)}>Received</Button>;
+        }}
+      />
     );
   };
   if (!initializing) {
