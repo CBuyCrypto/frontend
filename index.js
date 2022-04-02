@@ -6,7 +6,7 @@ import "./global";
 
 const { registerRootComponent, scheme } = require("expo");
 const { default: App } = require("./App");
-
+import "react-native-gesture-handler";
 const {
   default: AsyncStorage,
 } = require("@react-native-async-storage/async-storage");
