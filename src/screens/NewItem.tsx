@@ -14,34 +14,51 @@ export const NewItem = ({
   route,
   navigation,
 }: StackScreenProps<navigationProps, "YourItems">) => {
-  const [item, setItem] = useState({} as Item);
+  const [item, setItem] = useState({
+    title: "",
+    description: "",
+    ipfshash: "",
+    price: 0,
+  } as Item);
   const [error, setError] = useState("");
   const web3 = useContext(Web3Context);
   const connector = useWalletConnect();
 
   async function listNewItem() {
+    if (!item.title || !item.description || !item.ipfshash || !item.price) {
+      setError("Not everything filled out.");
+      return;
+    }
     const address = connector.accounts[0];
     console.log(address);
     console.log(item);
-    console.log(String(item.price))
+    console.log(String(item.price));
+    const ipfsHash = await uploadFile(item.ipfshash);
     const data = web3.eth.abi.encodeFunctionCall(
       {
         name: "newItem",
         type: "function",
-        inputs: [{
-          type: 'string',
-          name: 'name'
-      },{
-          type: 'string',
-          name: 'description'
-      },{
-        type: 'uint256',
-        name: 'price'
-      },{
-        type: 'string',
-        name: 'ipfsHash'
-      }]
-      }, [item.title, item.description, String(item.price), 'asdf;akj']);
+        inputs: [
+          {
+            type: "string",
+            name: "name",
+          },
+          {
+            type: "string",
+            name: "description",
+          },
+          {
+            type: "uint256",
+            name: "price",
+          },
+          {
+            type: "string",
+            name: "ipfsHash",
+          },
+        ],
+      },
+      [item.title, item.description, String(item.price), ipfsHash]
+    );
 
     const estimatedGas = await web3.eth.estimateGas({
       from: address,
@@ -60,14 +77,10 @@ export const NewItem = ({
       data: data,
       nonce: await web3.eth.getTransactionCount(marketplaceInfo.address),
     });
+    navigation.navigate("ItemList");
 
     console.log("TX: ");
     console.log(txHash);
-
-    if (!item.title || !item.description || !item.ipfshash || !item.price) {
-      setError("Not everything filled out.");
-      return;
-    }
   }
   return (
     <View
@@ -95,7 +108,7 @@ export const NewItem = ({
         />
         <TextInput
           autoComplete={undefined}
-          value={item.price}
+          value={item.price ? item.price.toString() : ""}
           mode="flat"
           label="Price"
           style={{ marginVertical: 5, width: "100%" }}
