@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
+//@ts-ignore
+import abiDecoder from "abi-decoder";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 
 const shortenAddress = (address: string) => {
@@ -10,7 +11,7 @@ const shortenAddress = (address: string) => {
   )}`;
 };
 
-const contractAddress = ""
+const contractAddress = "";
 
 export default function Home() {
   const connector = useWalletConnect();
@@ -23,11 +24,9 @@ export default function Home() {
     return connector.killSession();
   }, [connector]);
 
-  /*
   const contractCall = React.useCallback(() => {
-    console.log("Contract Call Happens Here")
-
-    const result = connector.sendTransaction({
+    console.log("here");
+    return connector.signTransaction({
       from: String(connector.accounts[0]), // Required
       to: "0x5AD22f3d353Ee97c041d5f504b1e77e2C766F3d2", // Required
       //gas: "string", // Required
@@ -36,30 +35,66 @@ export default function Home() {
       data: "0xcfae3217", // Required
       //nonce: "string", // Required
     });
-  }, [connector])*/
+  }, [connector]);
 
-  async function contractCall(){
-    console.log("Contract Call Happens Here")
-
-    const result = await connector.sendTransaction({
-      from: String(connector.accounts[0]), // Required
-      to: "0x5AD22f3d353Ee97c041d5f504b1e77e2C766F3d2", // Required
-      //gas: "string", // Required
-      //gasPrice: "string", // Required
-      //value: "string", // Required
-      data: "0xcfae3217", // Required
-      //nonce: "string", // Required
-    });
-    console.log(result);
-    return result;
-  }
-
-  /*
-  function testing(){
-    const testData = "0x53d9d9100000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000a6d9c5f7d4de3cef51ad3b7235d79ccc95114de5000000000000000000000000a6d9c5f7d4de3cef51ad3b7235d79ccc95114daa";
+  function testing() {
+    console.log("hi", abiDecoder);
+    const testABI = [
+      {
+        inputs: [{ type: "address", name: "" }],
+        constant: true,
+        name: "isInstantiation",
+        payable: false,
+        outputs: [{ type: "bool", name: "" }],
+        type: "function",
+      },
+      {
+        inputs: [
+          { type: "address[]", name: "_owners" },
+          { type: "uint256", name: "_required" },
+          { type: "uint256", name: "_dailyLimit" },
+        ],
+        constant: false,
+        name: "create",
+        payable: false,
+        outputs: [{ type: "address", name: "wallet" }],
+        type: "function",
+      },
+      {
+        inputs: [
+          { type: "address", name: "" },
+          { type: "uint256", name: "" },
+        ],
+        constant: true,
+        name: "instantiations",
+        payable: false,
+        outputs: [{ type: "address", name: "" }],
+        type: "function",
+      },
+      {
+        inputs: [{ type: "address", name: "creator" }],
+        constant: true,
+        name: "getInstantiationCount",
+        payable: false,
+        outputs: [{ type: "uint256", name: "" }],
+        type: "function",
+      },
+      {
+        inputs: [
+          { indexed: false, type: "address", name: "sender" },
+          { indexed: false, type: "address", name: "instantiation" },
+        ],
+        type: "event",
+        name: "ContractInstantiation",
+        anonymous: false,
+      },
+    ];
+    abiDecoder.addABI(testABI);
+    const testData =
+      "0x53d9d9100000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000a6d9c5f7d4de3cef51ad3b7235d79ccc95114de5000000000000000000000000a6d9c5f7d4de3cef51ad3b7235d79ccc95114daa";
     const decodedData = abiDecoder.decodeMethod(testData);
     console.log(decodedData);
-  }*/
+  }
 
   return (
     <View style={styles.container}>
@@ -77,7 +112,7 @@ export default function Home() {
       {!!connector.connected && (
         <>
           <Text>{shortenAddress(connector.accounts[0])}</Text>
-          <TouchableOpacity onPress={contractCall} style={styles.buttonStyle}>
+          <TouchableOpacity onPress={testing} style={styles.buttonStyle}>
             <Text style={styles.buttonTextStyle}>Contract Call</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={killSession} style={styles.buttonStyle}>
