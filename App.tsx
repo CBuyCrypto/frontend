@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import Home from "./src/screens/Home";
