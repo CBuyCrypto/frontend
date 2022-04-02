@@ -14,6 +14,7 @@ module.exports = {
       stream: require.resolve("readable-stream"),
       vm: require.resolve("vm-browserify"),
       abiDecoder: require.resolve("abi-decoder"),
+      ethers: require.resolve("ethers"),
     },
   },
 };
