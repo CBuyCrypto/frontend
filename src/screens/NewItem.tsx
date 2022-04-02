@@ -23,16 +23,24 @@ export const NewItem = ({
     console.log(address);
     const data = web3.eth.abi.encodeFunctionCall(
       {
-        name: "setGreeting",
+        name: "newItem",
         type: "function",
         inputs: [
           {
             type: "string",
-            name: "_greeting",
+            name: "name",
+          },
+          {
+            type: "uint256",
+            name: "price",
+          },
+          {
+            type: "string",
+            name: "ipfsHash",
           },
         ],
       },
-      ["Writing from WITHIN!!!"]
+      [item.title, item.description, String(item.price), item.ipfshash]
     );
 
     const estimatedGas = await web3.eth.estimateGas({
