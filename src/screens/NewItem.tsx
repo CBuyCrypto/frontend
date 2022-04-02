@@ -5,6 +5,7 @@ import { Button, FAB, HelperText, TextInput } from "react-native-paper";
 import { Item, navigationProps, Web3Context } from "../util";
 import * as ImagePicker from "expo-image-picker";
 import FABs from "../components/ActionButtons";
+import { uploadFile } from "../web3/IPFS";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import greeterInfo from "../contractData/GreeterInfo";
 
@@ -129,6 +130,10 @@ export const NewItem = ({
               allowsEditing: true,
               aspect: [1, 1],
               quality: 1,
+            }).then((result) => {
+              if (!result.cancelled) {
+                uploadFile(result.uri);
+              }
             })
           }
           mode="text"
