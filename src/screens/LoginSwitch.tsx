@@ -1,19 +1,44 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { useCallback } from "react";
+import { Fragment, useCallback } from "react";
 import { View } from "react-native";
-import { Button, Headline, Text } from "react-native-paper";
+import {
+  Appbar,
+  Button,
+  Headline,
+  IconButton,
+  Subheading,
+  Text,
+} from "react-native-paper";
 import { Stack } from "./Stack";
-
+const shortenAddress = (address: string) => {
+  return `${address.slice(0, 6)}...${address.slice(
+    address.length - 4,
+    address.length
+  )}`;
+};
 export const LoginSwitch = () => {
   const connector = useWalletConnect();
   const connectWallet = useCallback(() => {
     return connector.connect();
   }, [connector]);
+  const logout = useCallback(() => {
+    return connector.killSession();
+  }, [connector]);
 
   return (
     <View style={{ flex: 1 }}>
-      <Headline>CBuy</Headline>
+      <Appbar.Header>
+        <Appbar.Content title="Cbuy" style={{ flexShrink: 0.5, flexGrow: 4 }} />
+        {connector && connector.accounts && connector.accounts[0] && (
+          <Fragment>
+            <Subheading style={{ color: "white", marginRight: 20 }}>
+              Welcome, {shortenAddress(connector.accounts[0])}
+            </Subheading>
+            <IconButton icon="power" onPress={logout} color="white" />
+          </Fragment>
+        )}
+      </Appbar.Header>
       {!connector.connected && (
         <Button mode="contained" onPress={connectWallet}>
           <Text>Connect a Wallet</Text>

@@ -13,7 +13,7 @@ declare global {
 export const theme = {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
-  roundness: 2,
+  roundness: 20,
   dark: false,
   colors: {
     ...PaperDefaultTheme.colors,
