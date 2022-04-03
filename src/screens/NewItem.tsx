@@ -62,7 +62,7 @@ export const NewItem = ({
           mode="flat"
           label="Title"
           style={{ marginVertical: 5, width: "100%" }}
-          onChangeText={(value) => setItem({ ...item, title: value })}
+          onChangeText={(value) => setItem({ ...item, name: value })}
         />
         <TextInput
           autoComplete={undefined}
