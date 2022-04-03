@@ -14,6 +14,7 @@ module.exports = {
       path: require.resolve("path-browserify"),
       stream: require.resolve("readable-stream"),
       vm: require.resolve("vm-browserify"),
+      "form-data": require.resolve("form-data"),
     },
   },
 };

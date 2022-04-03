@@ -18,6 +18,7 @@ export async function uploadFile(localUri: string) {
     xhr.open("GET", localUri, true);
     xhr.send(null);
   })) as Blob;
+  console.log("BUd", blob.size);
   let data = new FormData();
   const pinataOptions = JSON.stringify({
     cidVersion: 0,
@@ -32,8 +33,9 @@ export async function uploadFile(localUri: string) {
       },
     ],
   });
+  console.log("ef", blob.size);
   data.append("pinataOptions", pinataOptions);
-  data.append("file", blob);
+  console.log("inf", data);
   const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
   const resp = await axios.post(url, data, {
     maxBodyLength: 2e256,

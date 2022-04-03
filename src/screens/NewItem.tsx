@@ -93,7 +93,7 @@ export const NewItem = ({
           style={{ height: 200, marginVertical: 5, width: "100%" }}
           onChangeText={(value) => setItem({ ...item, description: value })}
         />
-        {item.ipfsHash && (
+        {item.ipfsHash ? (
           <Image
             style={{
               resizeMode: "center",
@@ -102,7 +102,7 @@ export const NewItem = ({
             }}
             source={{ uri: item.ipfsHash }}
           />
-        )}
+        ) : null}
         <Button
           onPress={() =>
             ImagePicker.launchImageLibraryAsync({

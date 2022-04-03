@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { Fragment, useCallback, useState } from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import {
   ActivityIndicator,
   Appbar,
@@ -32,20 +32,47 @@ export const LoginSwitch = () => {
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Content title="Cbuy" style={{ flexShrink: 0.5, flexGrow: 4 }} />
+        {/*<Appbar.Content title="Cbuy" style={{ flexShrink: 0.5, flexGrow: 4 }} />*/}
+        <Image
+          source={require("../../assets/CBuyLogo.png")}
+          style={{ resizeMode: "center", height: 50, width: 50, marginLeft: 5 }}
+        />
+        <Appbar.Content title="" />
         {connector && connector.accounts && connector.accounts[0] && (
           <Fragment>
             <Subheading style={{ color: "white", marginRight: 20 }}>
-              Welcome, {shortenAddress(connector.accounts[0])}
+              {"Welcome, " + shortenAddress(connector.accounts[0])}
             </Subheading>
             <IconButton icon="power" onPress={logout} color="white" />
           </Fragment>
         )}
       </Appbar.Header>
       {!initializing && !connector.connected && (
-        <Button mode="contained" onPress={connectWallet}>
-          <Text>Connect a Wallet</Text>
-        </Button>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            alignSelf: "center",
+            maxWidth: 300,
+            maxHeight: 300,
+            flex: 1,
+            margin: 20,
+          }}
+        >
+          <Image
+            source={require("../../assets/CBuyLogo.png")}
+            style={{
+              resizeMode: "center",
+              height: 150,
+              width: 150,
+              marginBottom: 10,
+            }}
+          />
+          <Button mode="contained" onPress={connectWallet}>
+            Connect a Wallet
+          </Button>
+        </View>
       )}
       {!initializing && !!connector.connected && <Stack />}
     </View>

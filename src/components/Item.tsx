@@ -24,7 +24,7 @@ export const RenderItem = (props: {
       >
         <View style={{ flex: 1, marginLeft: 5 }}>
           <Subheading numberOfLines={1}>
-            {props.item.name + (props.status ? props.status : "")}
+            {props.item.name + (props.status ? ` (${props.status})` : "")}
           </Subheading>
           <Text numberOfLines={4}>{props.item.description}</Text>
         </View>
