@@ -20,7 +20,7 @@ export async function getItems(web3: Web3) {
     marketplaceInfo.address
   );
   let items = (await contract.methods.getListings().call()) as Item[];
-  console.log("before", items);
+  console.log("before", JSON.parse(JSON.stringify(items)));
   items = items.map((item) => {
     return {
       ...item,
