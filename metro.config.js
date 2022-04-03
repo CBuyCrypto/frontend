@@ -5,6 +5,7 @@ module.exports = {
     extraNodeModules: {
       crypto,
       url,
+      axios: require.resolve("axios"),
       fs: require.resolve("expo-file-system"),
       http: require.resolve("stream-http"),
       https: require.resolve("https-browserify"),
@@ -13,8 +14,7 @@ module.exports = {
       path: require.resolve("path-browserify"),
       stream: require.resolve("readable-stream"),
       vm: require.resolve("vm-browserify"),
-      abiDecoder: require.resolve("abi-decoder"),
-      ethers: require.resolve("ethers"),
+      "form-data": require.resolve("form-data"),
     },
   },
 };
