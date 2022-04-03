@@ -15,7 +15,6 @@ function decodeStatus(status: number) {
     : "INACTIVE";
 }
 export async function getItems(web3: Web3) {
-  /*
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
@@ -27,11 +26,10 @@ export async function getItems(web3: Web3) {
       status: decodeStatus((item.status as unknown) as number),
     };
   });
-  console.log("Received Items", items);*/
-  return [{}];
+  console.log("Received Items", items);
+  return items;
 }
 export async function getBuyersItems(web3: Web3) {
-  /*
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
@@ -43,8 +41,8 @@ export async function getBuyersItems(web3: Web3) {
       status: decodeStatus((item.status as unknown) as number),
     };
   });
-  console.log("Received Items", items);*/
-  return [{}];
+  console.log("Received Items", items);
+  return items;
 }
 export async function buyItem(
   web3: Web3,
@@ -91,6 +89,11 @@ async function callFunctionWithId(
   id: string,
   address: string
 ) {
+  console.log("inside", functionName);
+  console.log("inside", web3);
+  console.log("inside", connector);
+  console.log("inside", id);
+  console.log("inside", address);
   const data = web3.eth.abi.encodeFunctionCall(
     {
       name: functionName,
@@ -104,11 +107,13 @@ async function callFunctionWithId(
     },
     [id]
   );
+  console.log("data inside", data);
   const estimatedGas = await web3.eth.estimateGas({
     from: address,
     to: marketplaceInfo.address,
     data: data,
   });
+  console.log("data inside", estimatedGas);
   const txHash = await connector.sendTransaction({
     from: address,
     to: marketplaceInfo.address,
@@ -118,6 +123,7 @@ async function callFunctionWithId(
     data: data,
     nonce: await web3.eth.getTransactionCount(marketplaceInfo.address),
   });
+  console.log("txhash", txHash);
   return;
 }
 export async function listItem(
@@ -126,30 +132,37 @@ export async function listItem(
   address: string,
   item: Item
 ) {
-  console.log("attempting to list item")
+  console.log("attempting to list item");
   const resp = await approveFunds(web3, connector, address, item.price * 2);
   console.log(resp);
   console.log("Before calls");
   console.log("item", item);
-  const data = web3.eth.abi.encodeFunctionCall({
-    name: 'newItem',
-    type: 'function',
-    inputs: [{
-        type: 'string',
-        name: 'name'
-    },{
-        type: 'string',
-        name: 'description'
-    },{
-      type: 'uint256',
-      name: 'price'
-    },{
-      type: 'string',
-      name: 'ipfsHash'
-    }]
-  }, [item.title, item.description, item.price.toString(), item.ipfshash]);
-      
-  
+  const data = web3.eth.abi.encodeFunctionCall(
+    {
+      name: "newItem",
+      type: "function",
+      inputs: [
+        {
+          type: "string",
+          name: "name",
+        },
+        {
+          type: "string",
+          name: "description",
+        },
+        {
+          type: "uint256",
+          name: "price",
+        },
+        {
+          type: "string",
+          name: "ipfsHash",
+        },
+      ],
+    },
+    [item.title, item.description, item.price.toString(), item.ipfshash]
+  );
+
   console.log("data", data);
   const estimatedGas = await web3.eth.estimateGas({
     from: address,
@@ -196,7 +209,7 @@ async function approveFunds(
         },
       ],
     },
-    [marketplaceInfo.address, (amount*2.5).toString()]
+    [marketplaceInfo.address, (amount * 2.5).toString()]
   );
   console.log("data", data);
   const estimatedGas = await web3.eth.estimateGas({

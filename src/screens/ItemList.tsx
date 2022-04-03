@@ -77,7 +77,7 @@ export const ItemList = ({
                 buyItem(
                   web3,
                   connector,
-                  item.id,
+                  item.itemId,
                   connector.accounts[0],
                   item.price
                 )
@@ -108,7 +108,7 @@ export const ItemList = ({
           }
           data={items}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.itemId}
           ListFooterComponent={<View style={{ height: 70 }}></View>}
         />
         <FABs navigation={navigation} />

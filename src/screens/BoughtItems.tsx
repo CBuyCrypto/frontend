@@ -35,7 +35,12 @@ export const BoughtItems = ({
           return (
             <Button
               onPress={() =>
-                receivedItem(web3, connector, item.id, connector.accounts[0])
+                receivedItem(
+                  web3,
+                  connector,
+                  item.itemId,
+                  connector.accounts[0]
+                )
               }
             >
               Received
@@ -63,7 +68,7 @@ export const BoughtItems = ({
           }
           data={items}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.itemId}
         />
         <FABs navigation={navigation} />
       </Fragment>

@@ -16,7 +16,7 @@ export const YourItems = ({
   const [items, setItems] = useState({} as Item[]);
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
-  useEffect(() => {    
+  useEffect(() => {
     getItems(web3).then((items) => {
       setItems(
         items
@@ -37,7 +37,12 @@ export const YourItems = ({
             item.status == "AVAILABLE" && (
               <Button
                 onPress={() =>
-                  removeItem(web3, connector, item.id, connector.accounts[0])
+                  removeItem(
+                    web3,
+                    connector,
+                    item.itemId,
+                    connector.accounts[0]
+                  )
                 }
               >
                 Remove
@@ -66,7 +71,7 @@ export const YourItems = ({
           }
           data={items}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.itemId}
         />
         <FABs navigation={navigation} />
       </Fragment>

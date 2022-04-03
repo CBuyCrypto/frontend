@@ -19,7 +19,7 @@ const FABs = (props: { navigation: any }) => {
           {
             icon: "account",
             label: "Items you are selling",
-            onPress: () => props.navigation.navigate("account"),
+            onPress: () => props.navigation.navigate("YourItems"),
           },
           {
             icon: "shopping",

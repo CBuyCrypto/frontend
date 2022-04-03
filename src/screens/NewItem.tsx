@@ -28,8 +28,8 @@ export const NewItem = ({
   async function listNewItem() {
     if (!item.title || !item.description || !item.ipfshash || !item.price) {
       setError("Not everything filled out.");
-      console.log("Not everything filled out")
-      console.log(item)
+      console.log("Not everything filled out");
+      console.log(item);
       return;
     }
     console.log("attempting list item");
