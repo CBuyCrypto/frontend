@@ -23,6 +23,7 @@ export const YourItems = ({
           .filter((item) => item.seller == connector.accounts[0])
           .sort((item) => item.createdOn)
       );
+      console.log(items)
       setInitializing(false);
     });
   }, []);
