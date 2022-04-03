@@ -15,7 +15,7 @@ function decodeStatus(status: number) {
     : "INACTIVE";
 }
 export async function getItems(web3: Web3) {
-  /*
+  
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
@@ -27,11 +27,11 @@ export async function getItems(web3: Web3) {
       status: decodeStatus((item.status as unknown) as number),
     };
   });
-  console.log("Received Items", items);*/
-  return [{}];
+  console.log("Received Items", items);
+  return items;
 }
 export async function getBuyersItems(web3: Web3) {
-  /*
+  
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
@@ -43,8 +43,8 @@ export async function getBuyersItems(web3: Web3) {
       status: decodeStatus((item.status as unknown) as number),
     };
   });
-  console.log("Received Items", items);*/
-  return [{}];
+  console.log("Received Items", items);
+  return items;
 }
 export async function buyItem(
   web3: Web3,
