@@ -188,7 +188,7 @@ export async function listItem(
         },
       ],
     },
-    [item.title, item.description, item.price.toString(), item.ipfshash]
+    [item.title, item.description, item.price.toString(), item.ipfsHash]
   );
 
   console.log("data", data);

@@ -55,7 +55,7 @@ export const ItemList = ({
     {
       id: "2",
       description: "DESC1w",
-      ipfshash: "QmexegxWiS82f9KxLxPALf9pn65yQcxxttfpfH41j6xFsx",
+      ipfsHash: "QmexegxWiS82f9KxLxPALf9pn65yQcxxttfpfH41j6xFsx",
       title: "TITLE1",
       price: 1,
       seller: "0x980988902345",
@@ -65,7 +65,7 @@ export const ItemList = ({
       id: "1",
       description:
         "DESC1wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-      ipfshash: "QmexegxWiS82f9KxLxPALf9pn65yQcxxttfpfH41j6xFsx",
+      ipfsHash: "QmexegxWiS82f9KxLxPALf9pn65yQcxxttfpfH41j6xFsx",
       title: "TITLE1",
       price: 1,
       seller: "0x980988902345",

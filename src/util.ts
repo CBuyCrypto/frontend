@@ -7,7 +7,7 @@ export const Web3Context = createContext({} as Web3);
 export interface Item {
   itemId: string;
   description: string;
-  ipfshash: string;
+  ipfsHash: string;
   title: string;
   price: number;
   seller: string;

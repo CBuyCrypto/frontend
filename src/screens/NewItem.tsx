@@ -18,7 +18,7 @@ export const NewItem = ({
   const [item, setItem] = useState({
     title: "",
     description: "",
-    ipfshash: "",
+    ipfsHash: "",
     price: 0,
   } as Item);
   const [error, setError] = useState("");
@@ -26,17 +26,17 @@ export const NewItem = ({
   const connector = useWalletConnect();
 
   async function listNewItem() {
-    if (!item.title || !item.description || !item.ipfshash || !item.price) {
+    if (!item.title || !item.description || !item.ipfsHash || !item.price) {
       setError("Not everything filled out.");
       console.log("Not everything filled out");
       console.log(item);
       return;
     }
     console.log("attempting list item");
-    const ipfsHash = await uploadFile(item.ipfshash);
+    const ipfsHash = await uploadFile(item.ipfsHash);
     const resp = await listItem(web3, connector, connector.accounts[0], {
       ...item,
-      ipfshash: ipfsHash,
+      ipfsHash: ipfsHash,
     });
     navigation.navigate("ItemList");
   }
@@ -92,14 +92,14 @@ export const NewItem = ({
           style={{ height: 200, marginVertical: 5, width: "100%" }}
           onChangeText={(value) => setItem({ ...item, description: value })}
         />
-        {item.ipfshash && (
+        {item.ipfsHash && (
           <Image
             style={{
               resizeMode: "center",
               height: 200,
               width: "100%",
             }}
-            source={{ uri: item.ipfshash }}
+            source={{ uri: item.ipfsHash }}
           />
         )}
         <Button
@@ -111,7 +111,7 @@ export const NewItem = ({
               quality: 1,
             }).then((result) => {
               if (!result.cancelled) {
-                setItem({ ...item, ipfshash: result.uri });
+                setItem({ ...item, ipfsHash: result.uri });
               }
             })
           }

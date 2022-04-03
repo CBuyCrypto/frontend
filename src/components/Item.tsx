@@ -9,10 +9,11 @@ export const RenderItem = (props: {
   status?: string;
 }) => {
   const isDesktop = useContext(DesktopContext);
+  console.log("EVAAAAN", props.status ? props.status : "");
   return (
     <Card style={[{ margin: 10, height: 300 }, isDesktop && { width: 300 }]}>
       <Card.Cover
-        source={{ uri: "https://ipfs.io/ipfs/" + props.item.ipfshash }}
+        source={{ uri: "https://ipfs.io/ipfs/" + props.item.ipfsHash }}
       />
       <View
         style={{
