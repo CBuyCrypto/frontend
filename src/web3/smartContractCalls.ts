@@ -20,12 +20,14 @@ export async function getItems(web3: Web3) {
     marketplaceInfo.address
   );
   let items = (await contract.methods.getListings().call()) as Item[];
+  console.log("before", items);
   items = items.map((item) => {
     return {
       ...item,
       status: decodeStatus((item.status as unknown) as number),
     };
   });
+  console.log("after", items);
   console.log("Received Items", items);
   return items;
 }
