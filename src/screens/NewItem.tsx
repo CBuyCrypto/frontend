@@ -16,7 +16,7 @@ export const NewItem = ({
   navigation,
 }: StackScreenProps<navigationProps, "YourItems">) => {
   const [item, setItem] = useState({
-    title: "",
+    name: "",
     description: "",
     ipfsHash: "",
     price: 0,
@@ -92,7 +92,7 @@ export const NewItem = ({
           style={{ height: 200, marginVertical: 5, width: "100%" }}
           onChangeText={(value) => setItem({ ...item, description: value })}
         />
-        {item.ipfsHash && (
+        {item.ipfsHash ? (
           <Image
             style={{
               resizeMode: "center",
@@ -101,7 +101,7 @@ export const NewItem = ({
             }}
             source={{ uri: item.ipfsHash }}
           />
-        )}
+        ) : null}
         <Button
           onPress={() =>
             ImagePicker.launchImageLibraryAsync({

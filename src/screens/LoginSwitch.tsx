@@ -41,16 +41,38 @@ export const LoginSwitch = () => {
         {connector && connector.accounts && connector.accounts[0] && (
           <Fragment>
             <Subheading style={{ color: "white", marginRight: 20 }}>
-              Welcome, {shortenAddress(connector.accounts[0])}
+              {"Welcome, " + shortenAddress(connector.accounts[0])}
             </Subheading>
             <IconButton icon="power" onPress={logout} color="white" />
           </Fragment>
         )}
       </Appbar.Header>
       {!initializing && !connector.connected && (
-        <Button mode="contained" onPress={connectWallet}>
-          <Text>Connect a Wallet</Text>
-        </Button>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            alignSelf: "center",
+            maxWidth: 300,
+            maxHeight: 300,
+            flex: 1,
+            margin: 20,
+          }}
+        >
+          <Image
+            source={require("../../assets/CBuyLogo.png")}
+            style={{
+              resizeMode: "center",
+              height: 150,
+              width: 150,
+              marginBottom: 10,
+            }}
+          />
+          <Button mode="contained" onPress={connectWallet}>
+            Connect a Wallet
+          </Button>
+        </View>
       )}
       {!initializing && !!connector.connected && <Stack />}
     </View>
