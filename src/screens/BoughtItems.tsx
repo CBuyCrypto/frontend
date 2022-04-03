@@ -28,7 +28,7 @@ export const BoughtItems = ({
             .filter(
               (item) =>
                 item.status == "SOLD" &&
-                item.buyer == connector.accounts[0]
+                String(item.buyer).toLowerCase() == String(connector.accounts[0]).toLowerCase()
             )
             .sort((item) => item.createdOn)
         );

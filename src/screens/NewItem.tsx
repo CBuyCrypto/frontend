@@ -16,10 +16,11 @@ export const NewItem = ({
   navigation,
 }: StackScreenProps<navigationProps, "YourItems">) => {
   const [item, setItem] = useState({
-    title: "",
+    name: "",
     description: "",
     ipfsHash: "",
     price: 0,
+    buyer: "0x00",
   } as Item);
   const [error, setError] = useState("");
   const web3 = useContext(Web3Context);
@@ -62,7 +63,7 @@ export const NewItem = ({
           mode="flat"
           label="Title"
           style={{ marginVertical: 5, width: "100%" }}
-          onChangeText={(value) => setItem({ ...item, title: value })}
+          onChangeText={(value) => setItem({ ...item, name: value })}
         />
         <TextInput
           autoComplete={undefined}

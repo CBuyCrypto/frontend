@@ -1,5 +1,5 @@
 const marketplaceInfo = {
-  address: "0x522D138Aa2d69d4d88C4Cd75355E5389a54C7b5B",
+  address: "0xB6d0eC5f5761062Efa4272530Ca4C3B55f22988A",
   abi: [
     {
       "anonymous": false,
@@ -225,6 +225,11 @@ const marketplaceInfo = {
               "internalType": "uint256",
               "name": "createdOn",
               "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
             }
           ],
           "internalType": "struct Marketplace.Listing",
@@ -280,6 +285,11 @@ const marketplaceInfo = {
               "internalType": "uint256",
               "name": "createdOn",
               "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
             }
           ],
           "internalType": "struct Marketplace.Listing[]",
@@ -335,6 +345,11 @@ const marketplaceInfo = {
               "internalType": "uint256",
               "name": "createdOn",
               "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
             }
           ],
           "internalType": "struct Marketplace.Listing[]",
@@ -396,6 +411,11 @@ const marketplaceInfo = {
               "internalType": "uint256",
               "name": "createdOn",
               "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "buyer",
+              "type": "address"
             }
           ],
           "internalType": "struct Marketplace.Listing[]",
