@@ -11,7 +11,6 @@ import {
   receivedItem,
 } from "../web3/smartContractCalls";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { useIsFocused } from "@react-navigation/native";
 
 export const BoughtItems = ({
   route,
@@ -21,14 +20,18 @@ export const BoughtItems = ({
   const [items, setItems] = useState({} as Item[]);
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
-  const isFocused = useIsFocused();
-  useEffect(() => {
-    setInitializing(true);
-  }, [isFocused]);
   useEffect(() => {
     if (initializing)
-      getBuyersItems(web3).then((items) => {
-        setItems(items.sort((item) => item.createdOn));
+      getItems(web3).then((items) => {
+        setItems(
+          items
+            .filter(
+              (item) =>
+                item.status == "SOLD" &&
+                item.buyer == connector.accounts[0]
+            )
+            .sort((item) => item.createdOn)
+        );
         setInitializing(false);
       });
   }, [initializing]);

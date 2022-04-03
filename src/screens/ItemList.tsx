@@ -37,6 +37,7 @@ export const ItemList = ({
   useEffect(() => {
     if (initializing)
       getItems(web3).then((items) => {
+        console.log(items);
         setItems(
           items
             .filter(
