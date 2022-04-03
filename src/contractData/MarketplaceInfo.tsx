@@ -1,5 +1,5 @@
 const marketplaceInfo = {
-  address: "0x2D6De96A05033d1eBbF3f39000EBC49D9E065f6c",
+  address: "0x522D138Aa2d69d4d88C4Cd75355E5389a54C7b5B",
   abi: [
     {
       "anonymous": false,
