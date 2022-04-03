@@ -6,7 +6,7 @@ import { DesktopContext, Item, navigationProps, Web3Context } from "../util";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RenderItem } from "../components/Item";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { getItems, removeItem } from "../web3/smartContractCalls";
+import { getItems, getSellerItems, removeItem } from "../web3/smartContractCalls";
 
 export const YourItems = ({
   route,
@@ -17,17 +17,17 @@ export const YourItems = ({
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
   useEffect(() => {
-    if (initializing)
-      getItems(web3).then((items) => {
-        setItems(
-          items
-            .filter((item) => item.seller == connector.accounts[0])
-            .sort((item) => item.createdOn)
-        );
-        console.log(items);
-        setInitializing(false);
-      });
-  }, [initializing]);
+
+    getSellerItems(web3, connector.accounts[0]).then((items) => {
+      setItems(
+        items
+          .sort((item) => item.createdOn)
+      );
+      console.log(items)
+      setInitializing(false);
+    });
+  }, []);
+
   const isDesktop = useContext(DesktopContext);
   const renderItem: ListRenderItem<Item> = ({ item, index }) => {
     return (

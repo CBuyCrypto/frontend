@@ -1,4 +1,4 @@
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { ConnectorEvents, useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useContext } from "react";
 import { Item, Web3Context } from "../util";
 import marketplaceInfo from "../contractData/MarketplaceInfo";
@@ -31,19 +31,44 @@ export async function getItems(web3: Web3) {
   console.log("Received Items", items);
   return items;
 }
-export async function getBuyersItems(web3: Web3) {
+
+export async function getSellerItems(web3: Web3, wallet:string) {
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
   );
-  let items = (await contract.methods.getUserListings().call()) as Item[];
+  console.log("Wallet!!")
+  console.log(wallet)
+  let items = (await contract.methods.getUserListings(wallet).call()) as Item[];
+  
   items = items.map((item) => {
     return {
       ...item,
       status: decodeStatus((item.status as unknown) as number),
     };
   });
-  console.log("Received Items", items);
+  console.log("I'm Selling");
+  console.log(items);
+  return items;
+}
+
+export async function getBuyersItems(web3: Web3, wallet:string) {
+  const contract = new web3.eth.Contract(
+    marketplaceInfo.abi as AbiItem[],
+    marketplaceInfo.address
+  );
+  console.log("Wallet!!")
+  console.log(wallet)
+  let items = (await contract.methods.getUserListings().call()) as Item[];
+  
+  items = items.map((item) => {
+    return {
+      ...item,
+      status: decodeStatus((item.status as unknown) as number),
+    };
+  });
+  console.log("I'm Selling");
+  console.log(items);
   return items;
 }
 export async function buyItem(
