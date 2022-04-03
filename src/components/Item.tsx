@@ -12,7 +12,7 @@ export const RenderItem = (props: {
   return (
     <Card style={[{ margin: 10, height: 300 }, isDesktop && { width: 300 }]}>
       <Card.Cover
-        source={{ uri: "https://ipfs.io/ipfs/" + props.item.ipfsHash }}
+        source={{ uri: "https://ipfs.io/ipfs/" + props.item.ipfshash }}
       />
       <View
         style={{
@@ -21,8 +21,9 @@ export const RenderItem = (props: {
         }}
       >
         <View style={{ flex: 1, marginLeft: 5 }}>
-          <Subheading numberOfLines={1}>{props.item.title}</Subheading>
-          {props.status && <Text>{props.status}</Text>}
+          <Subheading numberOfLines={1}>
+            {props.item.title + (props.status ? props.status : "")}
+          </Subheading>
           <Text numberOfLines={4}>{props.item.description}</Text>
         </View>
         <View

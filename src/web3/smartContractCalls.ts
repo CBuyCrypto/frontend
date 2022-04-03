@@ -1,4 +1,7 @@
-import { ConnectorEvents, useWalletConnect } from "@walletconnect/react-native-dapp";
+import {
+  ConnectorEvents,
+  useWalletConnect,
+} from "@walletconnect/react-native-dapp";
 import { useContext } from "react";
 import { Item, Web3Context } from "../util";
 import marketplaceInfo from "../contractData/MarketplaceInfo";
@@ -32,15 +35,15 @@ export async function getItems(web3: Web3) {
   return items;
 }
 
-export async function getSellerItems(web3: Web3, wallet:string) {
+export async function getSellerItems(web3: Web3, wallet: string) {
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
   );
-  console.log("Wallet!!")
-  console.log(wallet)
+  console.log("Wallet!!");
+  console.log(wallet);
   let items = (await contract.methods.getUserListings(wallet).call()) as Item[];
-  
+
   items = items.map((item) => {
     return {
       ...item,
@@ -52,15 +55,13 @@ export async function getSellerItems(web3: Web3, wallet:string) {
   return items;
 }
 
-export async function getBuyersItems(web3: Web3, wallet:string) {
+export async function getBuyersItems(web3: Web3) {
   const contract = new web3.eth.Contract(
     marketplaceInfo.abi as AbiItem[],
     marketplaceInfo.address
   );
-  console.log("Wallet!!")
-  console.log(wallet)
   let items = (await contract.methods.getUserListings().call()) as Item[];
-  
+
   items = items.map((item) => {
     return {
       ...item,

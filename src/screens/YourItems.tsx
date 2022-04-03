@@ -6,27 +6,33 @@ import { DesktopContext, Item, navigationProps, Web3Context } from "../util";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RenderItem } from "../components/Item";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { getItems, getSellerItems, removeItem } from "../web3/smartContractCalls";
+import {
+  getItems,
+  getSellerItems,
+  removeItem,
+} from "../web3/smartContractCalls";
+import { useIsFocused } from "@react-navigation/native";
 
 export const YourItems = ({
   route,
   navigation,
 }: StackScreenProps<navigationProps, "YourItems">) => {
   const connector = useWalletConnect();
+  const isFocused = useIsFocused();
   const [items, setItems] = useState({} as Item[]);
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
   useEffect(() => {
-
-    getSellerItems(web3, connector.accounts[0]).then((items) => {
-      setItems(
-        items
-          .sort((item) => item.createdOn)
-      );
-      console.log(items)
-      setInitializing(false);
-    });
-  }, []);
+    setInitializing(true);
+  }, [isFocused]);
+  useEffect(() => {
+    if (initializing)
+      getSellerItems(web3, connector.accounts[0]).then((items) => {
+        setItems(items.sort((item) => item.createdOn));
+        console.log(items);
+        setInitializing(false);
+      });
+  }, [initializing]);
 
   const isDesktop = useContext(DesktopContext);
   const renderItem: ListRenderItem<Item> = ({ item, index }) => {

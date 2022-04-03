@@ -21,6 +21,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RenderItem } from "../components/Item";
 import { buyItem, getItems } from "../web3/smartContractCalls";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 export const ItemList = ({
   route,
@@ -28,7 +29,11 @@ export const ItemList = ({
 }: StackScreenProps<navigationProps, "ItemList">) => {
   const connector = useWalletConnect();
   const [items, setItems] = useState({} as Item[]);
+  const isFocused = useIsFocused();
   const [initializing, setInitializing] = useState(true);
+  useEffect(() => {
+    setInitializing(true);
+  }, [isFocused]);
   useEffect(() => {
     if (initializing)
       getItems(web3).then((items) => {
