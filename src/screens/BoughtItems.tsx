@@ -21,11 +21,12 @@ export const BoughtItems = ({
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
   useEffect(() => {
-    getBuyersItems(web3).then((items) => {
-      setItems(items.sort((item) => item.createdOn));
-      setInitializing(false);
-    });
-  }, []);
+    if (initializing)
+      getBuyersItems(web3).then((items) => {
+        setItems(items.sort((item) => item.createdOn));
+        setInitializing(false);
+      });
+  }, [initializing]);
   const isDesktop = useContext(DesktopContext);
   const renderItem: ListRenderItem<Item> = ({ item, index }) => {
     return (
@@ -40,7 +41,7 @@ export const BoughtItems = ({
                   connector,
                   item.itemId,
                   connector.accounts[0]
-                )
+                ).then(() => setInitializing(true))
               }
             >
               Received

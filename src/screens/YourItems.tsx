@@ -17,16 +17,17 @@ export const YourItems = ({
   const [initializing, setInitializing] = useState(true);
   const web3 = useContext(Web3Context);
   useEffect(() => {
-    getItems(web3).then((items) => {
-      setItems(
-        items
-          .filter((item) => item.seller == connector.accounts[0])
-          .sort((item) => item.createdOn)
-      );
-      console.log(items)
-      setInitializing(false);
-    });
-  }, []);
+    if (initializing)
+      getItems(web3).then((items) => {
+        setItems(
+          items
+            .filter((item) => item.seller == connector.accounts[0])
+            .sort((item) => item.createdOn)
+        );
+        console.log(items);
+        setInitializing(false);
+      });
+  }, [initializing]);
   const isDesktop = useContext(DesktopContext);
   const renderItem: ListRenderItem<Item> = ({ item, index }) => {
     return (
@@ -43,7 +44,7 @@ export const YourItems = ({
                     connector,
                     item.itemId,
                     connector.accounts[0]
-                  )
+                  ).then(() => setInitializing(true))
                 }
               >
                 Remove

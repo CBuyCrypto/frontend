@@ -30,18 +30,20 @@ export const ItemList = ({
   const [items, setItems] = useState({} as Item[]);
   const [initializing, setInitializing] = useState(true);
   useEffect(() => {
-    getItems(web3).then((items) => {
-      setItems(
-        items
-          .filter(
-            (item) =>
-              item.status == "AVAILABLE" && item.seller != connector.accounts[0]
-          )
-          .sort((item) => item.createdOn)
-      );
-      setInitializing(false);
-    });
-  }, []);
+    if (initializing)
+      getItems(web3).then((items) => {
+        setItems(
+          items
+            .filter(
+              (item) =>
+                item.status == "AVAILABLE" &&
+                item.seller != connector.accounts[0]
+            )
+            .sort((item) => item.createdOn)
+        );
+        setInitializing(false);
+      });
+  }, [initializing]);
   const web3 = useContext(Web3Context);
   const isDesktop = useContext(DesktopContext);
   /*const items = [
@@ -80,7 +82,9 @@ export const ItemList = ({
                   item.itemId,
                   connector.accounts[0],
                   item.price
-                )
+                ).then(() => {
+                  setInitializing(true);
+                })
               }
             >
               Buy
