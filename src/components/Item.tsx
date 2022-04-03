@@ -10,6 +10,7 @@ export const RenderItem = (props: {
 }) => {
   const isDesktop = useContext(DesktopContext);
   console.log("EVAAAAN", props.status ? props.status : "");
+  console.log("budnw", props.item);
   return (
     <Card style={[{ margin: 10, height: 300 }, isDesktop && { width: 300 }]}>
       <Card.Cover
@@ -23,7 +24,7 @@ export const RenderItem = (props: {
       >
         <View style={{ flex: 1, marginLeft: 5 }}>
           <Subheading numberOfLines={1}>
-            {props.item.title + (props.status ? props.status : "")}
+            {props.item.name + (props.status ? props.status : "")}
           </Subheading>
           <Text numberOfLines={4}>{props.item.description}</Text>
         </View>

@@ -8,7 +8,7 @@ export interface Item {
   itemId: string;
   description: string;
   ipfsHash: string;
-  title: string;
+  name: string;
   price: number;
   seller: string;
   status: "AVAILABLE" | "SOLD" | "RECEIVED" | "INACTIVE";

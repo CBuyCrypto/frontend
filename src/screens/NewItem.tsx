@@ -26,7 +26,7 @@ export const NewItem = ({
   const connector = useWalletConnect();
 
   async function listNewItem() {
-    if (!item.title || !item.description || !item.ipfsHash || !item.price) {
+    if (!item.name || !item.description || !item.ipfsHash || !item.price) {
       setError("Not everything filled out.");
       console.log("Not everything filled out");
       console.log(item);
@@ -58,7 +58,7 @@ export const NewItem = ({
       >
         <TextInput
           autoComplete={undefined}
-          value={item.title}
+          value={item.name}
           mode="flat"
           label="Title"
           style={{ marginVertical: 5, width: "100%" }}
